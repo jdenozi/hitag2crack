@@ -1,0 +1,1 @@
+/usr/bin/cc -g -Wl,--enable-auto-import CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.o CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.o CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.o CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.o -o ht2crack5gpu.exe -Wl,--out-implib,libht2crack5gpu.dll.a -Wl,--major-image-version,0,--minor-image-version,0  /usr/lib/libOpenCL.dll.a 

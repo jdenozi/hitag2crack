@@ -1,0 +1,12 @@
+C:\Users\Denozi\AppData\Local\JetBrains\CLion2021.1\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker
+CMake Error at /cygdrive/c/Users/Denozi/AppData/Local/JetBrains/CLion2021.1/cygwin_cmake/share/cmake-3.19.2/Modules/FindPackageHandleStandardArgs.cmake:218 (message):
+  Could NOT find OpenCL: Found unsuitable version "2.2", but required is at
+  least "3.0.0" (found /usr/lib/libOpenCL.dll.a)
+Call Stack (most recent call first):
+  /cygdrive/c/Users/Denozi/AppData/Local/JetBrains/CLion2021.1/cygwin_cmake/share/cmake-3.19.2/Modules/FindPackageHandleStandardArgs.cmake:580 (_FPHSA_FAILURE_MESSAGE)
+  /cygdrive/c/Users/Denozi/AppData/Local/JetBrains/CLion2021.1/cygwin_cmake/share/cmake-3.19.2/Modules/FindOpenCL.cmake:158 (find_package_handle_standard_args)
+  CMakeLists.txt:12 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug/CMakeFiles/CMakeOutput.log".
