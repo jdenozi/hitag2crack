@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/deviceinfo.c" "/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug/CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.o"
-  "/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/hitagcrypto.c" "/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug/CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.o"
-  "/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/ht2crack5gpu.c" "/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug/CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.o"
-  "/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/ht2crackutils.c" "/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug/CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.o"
+  "/home/denozi/Documents/Projects/hitag2crack/deviceinfo.c" "/home/denozi/Documents/Projects/hitag2crack/cmake-build-debug/CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.o"
+  "/home/denozi/Documents/Projects/hitag2crack/hitagcrypto.c" "/home/denozi/Documents/Projects/hitag2crack/cmake-build-debug/CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.o"
+  "/home/denozi/Documents/Projects/hitag2crack/ht2crack5gpu.c" "/home/denozi/Documents/Projects/hitag2crack/cmake-build-debug/CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.o"
+  "/home/denozi/Documents/Projects/hitag2crack/ht2crackutils.c" "/home/denozi/Documents/Projects/hitag2crack/cmake-build-debug/CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

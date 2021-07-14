@@ -9,6 +9,6 @@ add_executable(ht2crack5gpu ht2crack5gpu.c
         ht2crackutils.c include/deviceinfo.h deviceinfo.c)
 include_directories(include/)
 
-find_package(OpenCL 3.0.0 REQUIRED)
+find_package(OpenCL 3.0 REQUIRED)
 
 target_link_libraries( ht2crack5gpu OpenCL::OpenCL)

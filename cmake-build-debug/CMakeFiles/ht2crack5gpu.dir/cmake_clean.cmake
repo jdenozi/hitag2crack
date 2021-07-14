@@ -3,9 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.o"
   "CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.o"
   "CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.o"
-  "ht2crack5gpu.exe"
+  "ht2crack5gpu"
   "ht2crack5gpu.pdb"
-  "libht2crack5gpu.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.

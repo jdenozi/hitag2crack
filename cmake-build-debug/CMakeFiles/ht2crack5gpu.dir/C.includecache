@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/ht2crack5gpu.c
+/home/denozi/Documents/Projects/hitag2crack/ht2crack5gpu.c
 stdint.h
 -
 stdbool.h
@@ -34,17 +34,17 @@ OpenCL/opencl.h
 CL/cl.h
 -
 include/ht2crackutils.h
-/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/include/ht2crackutils.h
+/home/denozi/Documents/Projects/hitag2crack/include/ht2crackutils.h
 include/deviceinfo.h
-/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/include/deviceinfo.h
+/home/denozi/Documents/Projects/hitag2crack/include/deviceinfo.h
 
-/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/include/deviceinfo.h
+/home/denozi/Documents/Projects/hitag2crack/include/deviceinfo.h
 
-/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/include/hitagcrypto.h
+/home/denozi/Documents/Projects/hitag2crack/include/hitagcrypto.h
 stdint.h
 -
 
-/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/include/ht2crackutils.h
+/home/denozi/Documents/Projects/hitag2crack/include/ht2crackutils.h
 stdio.h
 -
 stdlib.h
@@ -66,5 +66,5 @@ fcntl.h
 pthread.h
 -
 hitagcrypto.h
-/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/include/hitagcrypto.h
+/home/denozi/Documents/Projects/hitag2crack/include/hitagcrypto.h
 

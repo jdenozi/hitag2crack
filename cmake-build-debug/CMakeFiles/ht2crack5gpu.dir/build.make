@@ -53,19 +53,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /cygdrive/c/Users/Denozi/AppData/Local/JetBrains/CLion2021.1/cygwin_cmake/bin/cmake.exe
+CMAKE_COMMAND = /opt/clion-2021.1.3/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /cygdrive/c/Users/Denozi/AppData/Local/JetBrains/CLion2021.1/cygwin_cmake/bin/cmake.exe -E rm -f
+RM = /opt/clion-2021.1.3/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker
+CMAKE_SOURCE_DIR = /home/denozi/Documents/Projects/hitag2crack
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug
+CMAKE_BINARY_DIR = /home/denozi/Documents/Projects/hitag2crack/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/ht2crack5gpu.dir/depend.make
@@ -78,55 +78,55 @@ include CMakeFiles/ht2crack5gpu.dir/flags.make
 
 CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.o: CMakeFiles/ht2crack5gpu.dir/flags.make
 CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.o: ../ht2crack5gpu.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.o -c /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/ht2crack5gpu.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/denozi/Documents/Projects/hitag2crack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.o -c /home/denozi/Documents/Projects/hitag2crack/ht2crack5gpu.c
 
 CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/ht2crack5gpu.c > CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/denozi/Documents/Projects/hitag2crack/ht2crack5gpu.c > CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.i
 
 CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/ht2crack5gpu.c -o CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/denozi/Documents/Projects/hitag2crack/ht2crack5gpu.c -o CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.s
 
 CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.o: CMakeFiles/ht2crack5gpu.dir/flags.make
 CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.o: ../hitagcrypto.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.o -c /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/hitagcrypto.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/denozi/Documents/Projects/hitag2crack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.o -c /home/denozi/Documents/Projects/hitag2crack/hitagcrypto.c
 
 CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/hitagcrypto.c > CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/denozi/Documents/Projects/hitag2crack/hitagcrypto.c > CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.i
 
 CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/hitagcrypto.c -o CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/denozi/Documents/Projects/hitag2crack/hitagcrypto.c -o CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.s
 
 CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.o: CMakeFiles/ht2crack5gpu.dir/flags.make
 CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.o: ../ht2crackutils.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.o -c /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/ht2crackutils.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/denozi/Documents/Projects/hitag2crack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.o -c /home/denozi/Documents/Projects/hitag2crack/ht2crackutils.c
 
 CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/ht2crackutils.c > CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/denozi/Documents/Projects/hitag2crack/ht2crackutils.c > CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.i
 
 CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/ht2crackutils.c -o CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/denozi/Documents/Projects/hitag2crack/ht2crackutils.c -o CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.s
 
 CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.o: CMakeFiles/ht2crack5gpu.dir/flags.make
 CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.o: ../deviceinfo.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.o -c /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/deviceinfo.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/denozi/Documents/Projects/hitag2crack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.o -c /home/denozi/Documents/Projects/hitag2crack/deviceinfo.c
 
 CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/deviceinfo.c > CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/denozi/Documents/Projects/hitag2crack/deviceinfo.c > CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.i
 
 CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/deviceinfo.c -o CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/denozi/Documents/Projects/hitag2crack/deviceinfo.c -o CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.s
 
 # Object files for target ht2crack5gpu
 ht2crack5gpu_OBJECTS = \
@@ -138,18 +138,18 @@ ht2crack5gpu_OBJECTS = \
 # External object files for target ht2crack5gpu
 ht2crack5gpu_EXTERNAL_OBJECTS =
 
-ht2crack5gpu.exe: CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.o
-ht2crack5gpu.exe: CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.o
-ht2crack5gpu.exe: CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.o
-ht2crack5gpu.exe: CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.o
-ht2crack5gpu.exe: CMakeFiles/ht2crack5gpu.dir/build.make
-ht2crack5gpu.exe: /usr/lib/libOpenCL.dll.a
-ht2crack5gpu.exe: CMakeFiles/ht2crack5gpu.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable ht2crack5gpu.exe"
+ht2crack5gpu: CMakeFiles/ht2crack5gpu.dir/ht2crack5gpu.c.o
+ht2crack5gpu: CMakeFiles/ht2crack5gpu.dir/hitagcrypto.c.o
+ht2crack5gpu: CMakeFiles/ht2crack5gpu.dir/ht2crackutils.c.o
+ht2crack5gpu: CMakeFiles/ht2crack5gpu.dir/deviceinfo.c.o
+ht2crack5gpu: CMakeFiles/ht2crack5gpu.dir/build.make
+ht2crack5gpu: /usr/lib/x86_64-linux-gnu/libOpenCL.so
+ht2crack5gpu: CMakeFiles/ht2crack5gpu.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/denozi/Documents/Projects/hitag2crack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable ht2crack5gpu"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ht2crack5gpu.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/ht2crack5gpu.dir/build: ht2crack5gpu.exe
+CMakeFiles/ht2crack5gpu.dir/build: ht2crack5gpu
 
 .PHONY : CMakeFiles/ht2crack5gpu.dir/build
 
@@ -158,6 +158,6 @@ CMakeFiles/ht2crack5gpu.dir/clean:
 .PHONY : CMakeFiles/ht2crack5gpu.dir/clean
 
 CMakeFiles/ht2crack5gpu.dir/depend:
-	cd /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug /cygdrive/c/Users/Denozi/CLionProjects/hitagcracker/cmake-build-debug/CMakeFiles/ht2crack5gpu.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/denozi/Documents/Projects/hitag2crack/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/denozi/Documents/Projects/hitag2crack /home/denozi/Documents/Projects/hitag2crack /home/denozi/Documents/Projects/hitag2crack/cmake-build-debug /home/denozi/Documents/Projects/hitag2crack/cmake-build-debug /home/denozi/Documents/Projects/hitag2crack/cmake-build-debug/CMakeFiles/ht2crack5gpu.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ht2crack5gpu.dir/depend
 

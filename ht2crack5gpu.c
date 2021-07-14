@@ -19,22 +19,26 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+
 #ifdef __APPLE__
 #include <OpenCL/opencl.h>
 #else
 #define CL_TARGET_OPENCL_VERSION 300
 #define CL_USE_DEPRECATED_OPENCL_1_2_APIS
+
 #include <CL/cl.h>
+
 #endif
 
 #include "include/ht2crackutils.h"
 #include "include/deviceinfo.h"
-#define KERNEL_FILE "C:/Users/Denozi/CLionProjects/hitagcracker/ht2crack5kernel.cl"
+
+#define KERNEL_FILE "/home/denozi/Documents/Projects/hitag2crack/ht2crack5kernel.cl"
 
 #define P(x) x,#x
 const uint8_t bits[9] = {20, 14, 4, 3, 1, 1, 1, 1, 1};
 #define lfsr_inv(state) (((state)<<1) | (__builtin_parityll((state) & ((0xce0044c101cd>>1)|(1ull<<(47))))))
-#define i4(x,a,b,c,d) ((uint32_t)((((x)>>(a))&1)<<3)|(((x)>>(b))&1)<<2|(((x)>>(c))&1)<<1|(((x)>>(d))&1))
+#define i4(x, a, b, c, d) ((uint32_t)((((x)>>(a))&1)<<3)|(((x)>>(b))&1)<<2|(((x)>>(c))&1)<<1|(((x)>>(d))&1))
 #define f(state) ((0xdd3929b >> ( (((0x3c65 >> i4(state, 2, 3, 5, 6) ) & 1) <<4) \
                                 | ((( 0xee5 >> i4(state, 8,12,14,15) ) & 1) <<3) \
                                 | ((( 0xee5 >> i4(state,17,21,23,26) ) & 1) <<2) \
@@ -57,9 +61,9 @@ __thread bitslice_t state[-2 + 32 + 48];
 bitslice_t keystream[32];
 bitslice_t bs_zeroes, bs_ones;
 
-#define f_a_bs(a,b,c,d)       (~(((a|b)&c)^(a|d)^b)) // 6 ops
-#define f_b_bs(a,b,c,d)       (~(((d|c)&(a^b))^(d|a|b))) // 7 ops
-#define f_c_bs(a,b,c,d,e)     (~((((((c^e)|d)&a)^b)&(c^b))^(((d^e)|a)&((d^b)|c)))) // 13 ops
+#define f_a_bs(a, b, c, d)       (~(((a|b)&c)^(a|d)^b)) // 6 ops
+#define f_b_bs(a, b, c, d)       (~(((d|c)&(a^b))^(d|a|b))) // 7 ops
+#define f_c_bs(a, b, c, d, e)     (~((((((c^e)|d)&a)^b)&(c^b))^(((d^e)|a)&((d^b)|c)))) // 13 ops
 #define lfsr_bs(i) (state[-2+i+ 0].value ^ state[-2+i+ 2].value ^ state[-2+i+ 3].value ^ state[-2+i+ 6].value ^ \
                     state[-2+i+ 7].value ^ state[-2+i+ 8].value ^ state[-2+i+16].value ^ state[-2+i+22].value ^ \
                     state[-2+i+23].value ^ state[-2+i+26].value ^ state[-2+i+30].value ^ state[-2+i+41].value ^ \
@@ -102,11 +106,11 @@ uint32_t uid, nR1, aR1, nR2, aR2;
 // Reduce type size of candidates array to fit OpenCL
 uint16_t candidates[(1 << 20) * 3];
 bitslice_t initial_bitslices[48];
-size_t filter_pos[20] = {4, 7, 9, 13, 16, 18, 22, 24, 27, 30, 32, 35, 45, 47  };
+size_t filter_pos[20] = {4, 7, 9, 13, 16, 18, 22, 24, 27, 30, 32, 35, 45, 47};
 size_t thread_count = 8;
 size_t layer_0_found;
 
-static void try_state(uint64_t s);
+static int try_state(uint64_t s);
 
 struct context {
     char *kernelSource;                 // source for kernel
@@ -131,14 +135,15 @@ static void runKernel(struct context *ctx, uint32_t cand_base, uint64_t *matches
     size_t global[2];
 
     // Write our data set into the input array in device memory
-    err = clEnqueueWriteBuffer(ctx->commands, ctx->matches_found, CL_TRUE, 0, sizeof(uint32_t), matches_found, 0, NULL, NULL);
+    err = clEnqueueWriteBuffer(ctx->commands, ctx->matches_found, CL_TRUE, 0, sizeof(uint32_t), matches_found, 0, NULL,
+                               NULL);
     if (err != CL_SUCCESS) {
         printf("Error: Failed to enque kernel writebuffer in runKernel! %d\n", err);
         exit(1);
     }
 
     // Set the arguments to our compute kernel
-    err  = clSetKernelArg(ctx->kernel, 0, sizeof(uint32_t), &cand_base);
+    err = clSetKernelArg(ctx->kernel, 0, sizeof(uint32_t), &cand_base);
     err |= clSetKernelArg(ctx->kernel, 4, sizeof(cl_mem), &ctx->matches_found);
     if (err != CL_SUCCESS) {
         printf("Error: Failed to set kernel arguments in runKernel! %d\n", err);
@@ -168,14 +173,15 @@ static void runKernel(struct context *ctx, uint32_t cand_base, uint64_t *matches
         exit(1);
     }
 
-    err = clEnqueueReadBuffer(ctx->commands, ctx->matches_found, CL_TRUE, 0, sizeof(uint32_t), matches_found, 0, NULL, NULL);
+    err = clEnqueueReadBuffer(ctx->commands, ctx->matches_found, CL_TRUE, 0, sizeof(uint32_t), matches_found, 0, NULL,
+                              NULL);
     if (err != CL_SUCCESS) {
         printf("Error: Failed to read matches_found! %d\n", err);
         exit(1);
     }
 }
 
-static void try_state(uint64_t s) {
+static int try_state(uint64_t s) {
     Hitag_State hstate;
     uint64_t keyrev, nR1xk;
     uint32_t b = 0;
@@ -198,61 +204,60 @@ static void try_state(uint64_t s) {
 
         uint64_t key = rev64(keyrev);
 
-        printf("Key: ");
+        printf("Equivalent key found: ");
         for (int i = 0; i < 6; i++) {
-            printf("%02X", (uint8_t)(key & 0xff));
+            printf("%02X", (uint8_t) (key & 0xff));
             key = key >> 8;
         }
         printf("\n");
-        exit(0);
+        return 0;
     }
+    return 1;
 }
 
 int main(int argc, char *argv[]) {
 
-    /*
     /// Check if device info is asking
     bool device_info = false;
     int i;
     char *p;
-    for(i=0; i < argc; i++) {
-        bool check = strcmp(*(argv+i),STR_DEFICE_INFO);
-        if(check == 0){
+    for (i = 0; i < argc; i++) {
+        bool check = strcmp(*(argv + i), STR_DEFICE_INFO);
+        if (check == 0) {
             device_info = true;
         }
     }
 
     /// Print device info to see the different information about the device
-    if (device_info==true){
+    if (device_info == true) {
 
 
         cl_int platform_ids = clGetPlatformIDs(2, NULL, NULL);
         printf("plateforme ID %d \n\n", platform_ids);
 
-        if(platform_ids == CL_SUCCESS){
+        if (platform_ids == CL_SUCCESS) {
             printf("It's a success");
         }
 
 
         cl_uint max_device_ids = 32;
-        cl_uint num_device_ids=0;
+        cl_uint num_device_ids = 0;
         cl_device_id device_ids[max_device_ids];
         clGetDeviceIDs(NULL, CL_DEVICE_TYPE_CUSTOM, max_device_ids, device_ids, &num_device_ids);
 
-        for(cl_uint idx=0; idx<num_device_ids; ++idx)
-        {
+        for (cl_uint idx = 0; idx < num_device_ids; ++idx) {
             printf("Device %d\n\n", idx);
 
-            printClDeviceInfoUint (device_ids[idx], P(CL_DEVICE_NAME));
-            printClDeviceInfoUint (device_ids[idx], P(CL_DEVICE_VENDOR));
-            printClDeviceInfoUint (device_ids[idx], P(CL_DEVICE_VERSION));
-            printClDeviceInfoUint (device_ids[idx], P(CL_DRIVER_VERSION));
-            printClDeviceInfoUint (device_ids[idx], P(CL_DEVICE_PROFILE));
-            printClDeviceInfoBool   (device_ids[idx], P(CL_DEVICE_AVAILABLE));
-            printClDeviceInfoBool   (device_ids[idx], P(CL_DEVICE_COMPILER_AVAILABLE));
-            printClDeviceInfoUlong  (device_ids[idx], P(CL_DEVICE_GLOBAL_MEM_SIZE));
-            printClDeviceInfoUlong  (device_ids[idx], P(CL_DEVICE_LOCAL_MEM_SIZE));
-            printClDeviceInfoBool   (device_ids[idx], P(CL_DEVICE_IMAGE_SUPPORT));
+            printClDeviceInfoUint(device_ids[idx], P(CL_DEVICE_NAME));
+            printClDeviceInfoUint(device_ids[idx], P(CL_DEVICE_VENDOR));
+            printClDeviceInfoUint(device_ids[idx], P(CL_DEVICE_VERSION));
+            printClDeviceInfoUint(device_ids[idx], P(CL_DRIVER_VERSION));
+            printClDeviceInfoUint(device_ids[idx], P(CL_DEVICE_PROFILE));
+            printClDeviceInfoBool(device_ids[idx], P(CL_DEVICE_AVAILABLE));
+            printClDeviceInfoBool(device_ids[idx], P(CL_DEVICE_COMPILER_AVAILABLE));
+            printClDeviceInfoUlong(device_ids[idx], P(CL_DEVICE_GLOBAL_MEM_SIZE));
+            printClDeviceInfoUlong(device_ids[idx], P(CL_DEVICE_LOCAL_MEM_SIZE));
+            printClDeviceInfoBool(device_ids[idx], P(CL_DEVICE_IMAGE_SUPPORT));
 
             printf("\n");
         }
@@ -318,6 +323,7 @@ int main(int argc, char *argv[]) {
         }
         interval <<= 1;
     }
+    printf("Hitag2 crack starting\n");
 
     // compute layer 0 output
     for (size_t i0 = 0; i0 < 1 << 20; i0++) {
@@ -325,9 +331,9 @@ int main(int argc, char *argv[]) {
 
         if (f(state0) == target >> 31) {
             // cf kernel, state is now split in 3 shorts >> 2
-            candidates[(layer_0_found * 3) + 0] = (uint16_t)((state0 >> (32 + 2)) & 0xffff);
-            candidates[(layer_0_found * 3) + 1] = (uint16_t)((state0 >> (16 + 2)) & 0xffff);
-            candidates[(layer_0_found * 3) + 2] = (uint16_t)((state0 >> (0 + 2)) & 0xffff);
+            candidates[(layer_0_found * 3) + 0] = (uint16_t) ((state0 >> (32 + 2)) & 0xffff);
+            candidates[(layer_0_found * 3) + 1] = (uint16_t) ((state0 >> (16 + 2)) & 0xffff);
+            candidates[(layer_0_found * 3) + 2] = (uint16_t) ((state0 >> (0 + 2)) & 0xffff);
             layer_0_found++;
         }
     }
@@ -338,6 +344,8 @@ int main(int argc, char *argv[]) {
     int fd;
 
     fd = open(KERNEL_FILE, O_RDONLY);
+    clock_t begin = clock();
+
     if (fd <= 0) {
         printf("Its here \n");
         printf("Cannot open %s\n", KERNELFILENAME);
@@ -349,7 +357,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    ctx.kernelSource = (char *)malloc(filestat.st_size);
+    ctx.kernelSource = (char *) malloc(filestat.st_size);
     if (!ctx.kernelSource) {
         printf("Cannot malloc kernelSource\n");
         exit(1);
@@ -373,17 +381,17 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    if(err == CL_INVALID_DEVICE_TYPE){
+    if (err == CL_INVALID_DEVICE_TYPE) {
         printf("device_type is not a valid value", err);
         exit(1);
     }
 
-    if(err == CL_INVALID_PLATFORM ){
+    if (err == CL_INVALID_PLATFORM) {
         printf("platform is not a valid platform", err);
         exit(1);
     }
 
-    err = clGetDeviceIDs(ctx.platform_id, CL_DEVICE_TYPE_GPU , 1, &(ctx.device_id), NULL);
+    err = clGetDeviceIDs(ctx.platform_id, CL_DEVICE_TYPE_GPU, 1, &(ctx.device_id), NULL);
     printf("%02d", err);
     if (err != CL_SUCCESS) {
         printf("Error: Failed to create a device group!: %d\n", err);
@@ -405,7 +413,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Create the compute program from the source buffer
-    ctx.program = clCreateProgramWithSource(ctx.context, 1, (const char **) & (ctx.kernelSource), NULL, &err);
+    ctx.program = clCreateProgramWithSource(ctx.context, 1, (const char **) &(ctx.kernelSource), NULL, &err);
     if (!ctx.program) {
         printf("Error: Failed to create compute program!\n");
         exit(1);
@@ -436,8 +444,8 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    ctx.candidates = clCreateBuffer(ctx.context,  CL_MEM_READ_ONLY,  sizeof(uint16_t) * ((1 << 20) * 3), NULL, NULL);
-    ctx.keystream = clCreateBuffer(ctx.context,  CL_MEM_READ_ONLY,  VECTOR_SIZE * 32, NULL, NULL);
+    ctx.candidates = clCreateBuffer(ctx.context, CL_MEM_READ_ONLY, sizeof(uint16_t) * ((1 << 20) * 3), NULL, NULL);
+    ctx.keystream = clCreateBuffer(ctx.context, CL_MEM_READ_ONLY, VECTOR_SIZE * 32, NULL, NULL);
 
     ctx.matches = clCreateBuffer(ctx.context, CL_MEM_WRITE_ONLY, sizeof(uint64_t) * 8192, NULL, NULL);
     ctx.matches_found = clCreateBuffer(ctx.context, CL_MEM_READ_WRITE, sizeof(uint32_t), NULL, NULL);
@@ -457,14 +465,15 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    err = clEnqueueWriteBuffer(ctx.commands, ctx.candidates, CL_TRUE, 0, sizeof(uint16_t) * ((1 << 20) * 3), candidates, 0, NULL, NULL);
+    err = clEnqueueWriteBuffer(ctx.commands, ctx.candidates, CL_TRUE, 0, sizeof(uint16_t) * ((1 << 20) * 3), candidates,
+                               0, NULL, NULL);
     if (err != CL_SUCCESS) {
         printf("Error: Failed to write to candidates array!\n");
         exit(1);
     }
 
     // Set the arguments to our compute kernel
-    err  = clSetKernelArg(ctx.kernel, 1, sizeof(cl_mem), &ctx.candidates);
+    err = clSetKernelArg(ctx.kernel, 1, sizeof(cl_mem), &ctx.candidates);
     err |= clSetKernelArg(ctx.kernel, 2, sizeof(cl_mem), &ctx.keystream);
     err |= clSetKernelArg(ctx.kernel, 3, sizeof(cl_mem), &ctx.matches);
     if (err != CL_SUCCESS) {
@@ -482,78 +491,19 @@ int main(int argc, char *argv[]) {
 
         printf("%5u candidates\n", matches_found[0]);
         for (uint32_t match = 0; match < matches_found[0]; match++) {
-            try_state(matches[match]);
+            int res;
+            res = try_state(matches[match]);
+            if (res == 0) {
+                clock_t end = clock();
+                double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
+                printf("Attack end in: %f secondes", time_spent);
+                exit(0);
+            }
         }
     }
 
     printf("Key not found\n");
     exit(1);
-    */
-    int i, j;
-    char* value;
-    size_t valueSize;
-    cl_uint platformCount;
-    cl_platform_id* platforms;
-    cl_uint deviceCount;
-    cl_device_id* devices;
-    cl_uint maxComputeUnits;
-
-    // get all platforms
-    clGetPlatformIDs(0, NULL, &platformCount);
-    platforms = (cl_platform_id*) malloc(sizeof(cl_platform_id) * platformCount);
-    clGetPlatformIDs(platformCount, platforms, NULL);
-
-    for (i = 0; i < platformCount; i++) {
-
-        // get all devices
-        clGetDeviceIDs(platforms[i], CL_DEVICE_TYPE_ALL, 0, NULL, &deviceCount);
-        devices = (cl_device_id*) malloc(sizeof(cl_device_id) * deviceCount);
-        clGetDeviceIDs(platforms[i], CL_DEVICE_TYPE_ALL, deviceCount, devices, NULL);
-
-        // for each device print critical attributes
-        for (j = 0; j < deviceCount; j++) {
-
-            // print device name
-            clGetDeviceInfo(devices[j], CL_DEVICE_NAME, 0, NULL, &valueSize);
-            value = (char*) malloc(valueSize);
-            clGetDeviceInfo(devices[j], CL_DEVICE_NAME, valueSize, value, NULL);
-            printf("%d. Device: %s\n", j+1, value);
-            free(value);
-
-            // print hardware device version
-            clGetDeviceInfo(devices[j], CL_DEVICE_VERSION, 0, NULL, &valueSize);
-            value = (char*) malloc(valueSize);
-            clGetDeviceInfo(devices[j], CL_DEVICE_VERSION, valueSize, value, NULL);
-            printf(" %d.%d Hardware version: %s\n", j+1, 1, value);
-            free(value);
-
-            // print software driver version
-            clGetDeviceInfo(devices[j], CL_DRIVER_VERSION, 0, NULL, &valueSize);
-            value = (char*) malloc(valueSize);
-            clGetDeviceInfo(devices[j], CL_DRIVER_VERSION, valueSize, value, NULL);
-            printf(" %d.%d Software version: %s\n", j+1, 2, value);
-            free(value);
-
-            // print c version supported by compiler for device
-            clGetDeviceInfo(devices[j], CL_DEVICE_OPENCL_C_VERSION, 0, NULL, &valueSize);
-            value = (char*) malloc(valueSize);
-            clGetDeviceInfo(devices[j], CL_DEVICE_OPENCL_C_VERSION, valueSize, value, NULL);
-            printf(" %d.%d OpenCL C version: %s\n", j+1, 3, value);
-            free(value);
-
-            // print parallel compute units
-            clGetDeviceInfo(devices[j], CL_DEVICE_MAX_COMPUTE_UNITS,
-                            sizeof(maxComputeUnits), &maxComputeUnits, NULL);
-            printf(" %d.%d Parallel compute units: %d\n", j+1, 4, maxComputeUnits);
-
-        }
-
-        free(devices);
-
-    }
-
-    free(platforms);
-
 
 }
 
